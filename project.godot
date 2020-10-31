@@ -8,15 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Control",
+"class": "Card",
+"language": "GDScript",
+"path": "res://card.gd"
+} ]
 _global_script_class_icons={
-
+"Card": ""
 }
 
 [application]
 
 config/name="CardSystem"
-run/main_scene="res://CardSystem.tscn"
+run/main_scene="res://card_system.tscn"
 config/icon="res://icon.png"
 
 [display]
