@@ -33,6 +33,10 @@ func _process(delta):
 
 
 func _ready():
+	rect_pivot_offset = rect_size / 2
+	$Visual.rect_pivot_offset = rect_size / 2
+	$Sensor.position = rect_pivot_offset
+	$Sensor
 	connect("mouse_entered", self, "_on_mouse_entered")
 	connect("mouse_exited", self, "_on_mouse_exited")
 	$Sensor.connect("area_entered", self, "_on_card_entered_area")
@@ -52,15 +56,15 @@ func _on_mouse_exited():
 
 
 func _on_card_entered_area(area):
-	if area is Holder:
-		area.emit_signal("card_entered", self)
-		self.connect("card_dropped", area, "_on_card_dropped", [self])
+	if area is HolderArea:
+		area.holder.emit_signal("card_entered", self)
+		self.connect("card_dropped", area.holder, "_on_card_dropped", [self])
 		print("card entered holder")
 
 
 func _on_card_exited_area(area):
-	if area is Holder:
-		area.emit_signal("card_exited", self)		
-		self.disconnect("card_dropped", area, "_on_card_dropped")
+	if area is HolderArea:
+		area.holder.emit_signal("card_exited", self)		
+		self.disconnect("card_dropped", area.holder, "_on_card_dropped")
 		print("card exited holder")
 		

@@ -1,4 +1,4 @@
-extends Area2D
+extends Control
 
 class_name Holder
 
@@ -12,8 +12,12 @@ signal card_dropped
 
 
 func _ready():
-	connect("card_entered", self, "_on_card_entered")
-	connect("card_exited", self, "_on_card_exited")
+	$Sensor.holder = self
+	rect_pivot_offset = rect_size / 2
+	$Visual.rect_pivot_offset = rect_size / 2
+	$Sensor.position = rect_pivot_offset
+	$Sensor.connect("area_entered", self, "_on_card_entered")
+	$Sensor.connect("card_exited", self, "_on_card_exited")
 	_is_hover = false
 
 
@@ -41,10 +45,6 @@ func _on_card_dropped(card):
 	emit_signal("card_dropped")
 	print("dropped card: ", card)
 	if snap_on_drop:
-		$Tween.interpolate_property(card, "rect_position", card.rect_position, self.position - card.rect_pivot_offset, 0.1, Tween.TRANS_SINE)
+		$Tween.interpolate_property(card, "rect_position", card.rect_position, self.rect_global_position, 0.1, Tween.TRANS_SINE)
 		card.set_rotation(deg2rad (rand_range(-5.0, 5.0)))
 		$Tween.start()
-
-
-func _on_Holder_card_dropped():
-	pass # Replace with function body.

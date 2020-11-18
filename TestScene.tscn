@@ -8,35 +8,44 @@
 [node name="TestScene" type="Node2D"]
 
 [node name="Holder" parent="." instance=ExtResource( 2 )]
-position = Vector2( 138.182, 168.136 )
+margin_left = 76.181
+margin_top = 66.6584
+margin_right = 176.181
+margin_bottom = 266.658
 
 [node name="Holder2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 270.076, 165.055 )
+margin_left = 216.3
+margin_top = 191.813
+margin_right = 316.3
+margin_bottom = 391.813
 
 [node name="Holder3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 411.278, 166.574 )
+margin_left = 424.437
+margin_top = 72.0999
+margin_right = 524.437
+margin_bottom = 272.1
 
 [node name="CardDrag" parent="." instance=ExtResource( 1 )]
-margin_left = 236.708
-margin_top = 562.541
-margin_right = 306.708
-margin_bottom = 712.541
+margin_left = 56.1093
+margin_top = 495.845
+margin_right = 156.109
+margin_bottom = 695.845
 
 [node name="CardDrag2" parent="." instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 389.987
-margin_top = 563.543
-margin_right = 459.987
-margin_bottom = 713.543
+margin_left = 246.562
+margin_top = 551.62
+margin_right = 346.562
+margin_bottom = 751.62
 
 [node name="CardDrag3" parent="." instance=ExtResource( 1 )]
-margin_left = 99.9989
-margin_top = 559.275
-margin_right = 169.999
-margin_bottom = 709.275
+margin_left = 400.285
+margin_top = 517.611
+margin_right = 500.285
+margin_bottom = 717.611
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

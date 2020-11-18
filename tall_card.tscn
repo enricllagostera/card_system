@@ -37,33 +37,34 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 27, 65 )
+extents = Vector2( 50, 100 )
 
 [node name="DraggableCard" type="Control"]
-margin_left = -35.0
-margin_top = -75.0
-margin_right = 35.0
-margin_bottom = 75.0
-rect_pivot_offset = Vector2( 35, 75 )
+margin_left = -50.0
+margin_top = -100.0
+margin_right = 50.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 50, 100 )
 mouse_default_cursor_shape = 6
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Visual" type="TextureRect" parent="."]
+[node name="Visual" type="NinePatchRect" parent="."]
 modulate = Color( 0.980392, 0.682353, 0.682353, 1 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -35.0
-margin_top = -75.0
-margin_right = 35.0
-margin_bottom = 75.0
-rect_pivot_offset = Vector2( 35, 75 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 1 )
-stretch_mode = 1
+region_rect = Rect2( 0, 0, 69.849, 151 )
+patch_margin_left = 18
+patch_margin_top = 16
+patch_margin_right = 18
+patch_margin_bottom = 31
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -74,7 +75,10 @@ anims/hover = SubResource( 1 )
 anims/idle = SubResource( 2 )
 
 [node name="Sensor" type="Area2D" parent="."]
+position = Vector2( 51.3194, 99.1398 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
-position = Vector2( 35, 75 )
 shape = SubResource( 3 )
