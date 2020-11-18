@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Card",
 "language": "GDScript",
 "path": "res://card.gd"
+}, {
+"base": "Control",
+"class": "DraggableCard",
+"language": "GDScript",
+"path": "res://tall_card.gd"
 } ]
 _global_script_class_icons={
-"Card": ""
+"Card": "",
+"DraggableCard": ""
 }
 
 [application]
@@ -31,5 +37,5 @@ window/size/height=800
 
 [rendering]
 
-environment/default_clear_color=Color( 0.717647, 0.686275, 0.686275, 1 )
+environment/default_clear_color=Color( 0.45098, 0.423529, 0.423529, 1 )
 environment/default_environment="res://default_env.tres"
