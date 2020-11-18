@@ -18,22 +18,32 @@ _global_script_classes=[ {
 "class": "DraggableCard",
 "language": "GDScript",
 "path": "res://tall_card.gd"
+}, {
+"base": "Area2D",
+"class": "Holder",
+"language": "GDScript",
+"path": "res://holder.gd"
 } ]
 _global_script_class_icons={
 "Card": "",
-"DraggableCard": ""
+"DraggableCard": "",
+"Holder": ""
 }
 
 [application]
 
 config/name="CardSystem"
-run/main_scene="res://card_system.tscn"
+run/main_scene="res://TestScene.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=600
 window/size/height=800
+window/size/resizable=false
+window/handheld/orientation="portrait"
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [rendering]
 
