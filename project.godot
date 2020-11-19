@@ -12,26 +12,20 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "Card",
 "language": "GDScript",
-"path": "res://card.gd"
-}, {
-"base": "Control",
-"class": "DraggableCard",
-"language": "GDScript",
-"path": "res://tall_card.gd"
+"path": "res://card-system/card.gd"
 }, {
 "base": "Control",
 "class": "Holder",
 "language": "GDScript",
-"path": "res://holder.gd"
+"path": "res://card-system/holder.gd"
 }, {
 "base": "Area2D",
 "class": "HolderArea",
 "language": "GDScript",
-"path": "res://holder_area.gd"
+"path": "res://card-system/holder_area.gd"
 } ]
 _global_script_class_icons={
 "Card": "",
-"DraggableCard": "",
 "Holder": "",
 "HolderArea": ""
 }
@@ -40,7 +34,6 @@ _global_script_class_icons={
 
 config/name="CardSystem"
 run/main_scene="res://TestScene.tscn"
-config/icon="res://icon.png"
 
 [display]
 
@@ -53,5 +46,5 @@ window/stretch/aspect="keep"
 
 [rendering]
 
-environment/default_clear_color=Color( 0.45098, 0.423529, 0.423529, 1 )
+environment/default_clear_color=Color( 0.235294, 0.223529, 0.282353, 1 )
 environment/default_environment="res://default_env.tres"
