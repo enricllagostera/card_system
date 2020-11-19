@@ -1,5 +1,7 @@
 extends AudioStreamPlayer
 
+class_name SfxPlayer
+
 export(float) var offset = 0.36
 export(float) var pitch_variation_range = 0.2
 

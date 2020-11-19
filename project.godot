@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "HolderArea",
 "language": "GDScript",
 "path": "res://card-system/holder_area.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "SfxPlayer",
+"language": "GDScript",
+"path": "res://sfx_player.gd"
 } ]
 _global_script_class_icons={
 "Card": "",
 "Holder": "",
-"HolderArea": ""
+"HolderArea": "",
+"SfxPlayer": ""
 }
 
 [application]

@@ -1,16 +1,12 @@
 extends Control
 
-
 class_name Card
 
-
 const INTERACTION_ROTATION_RANGE := 8.0
-
 
 var _is_grabbing
 var _cursor_over
 var _grabbed_offset
-
 
 signal card_picked
 signal card_dropped
@@ -66,6 +62,7 @@ func _on_mouse_exited():
 func _on_card_entered_area(area):
 	if area is HolderArea:
 		area.holder.emit_signal("card_entered", self)
+
 
 func _on_card_exited_area(area):
 	if area is HolderArea:
