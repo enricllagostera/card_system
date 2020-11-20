@@ -19,9 +19,6 @@ func _ready():
 	$Sensor.holder = self
 	$Sensor.position = rect_pivot_offset
 	$Visual.rect_pivot_offset = rect_pivot_offset
-	connect("card_entered", self, "_on_card_entered")
-	connect("card_exited", self, "_on_card_exited")
-	connect("card_removed", self, "_on_card_removed")
 
 
 func _highlight_top_card():
@@ -44,43 +41,41 @@ func _add_card(card):
 	_cards.append(card)
 	_snap(card)
 	_highlight_top_card()
-	print("added card: ", card)
 	emit_signal("card_added")
 
 
-func _on_card_entered(card):
+func on_card_entered(card):
 	if not has_card(card):
 		card.connect("card_dropped", self, "_on_card_dropped")
+	emit_signal("card_entered")
 
 
-func _on_card_exited(card):
+func on_card_exited(card):
 	if not has_card(card):
 		card.disconnect("card_dropped", self, "_on_card_dropped")
+	emit_signal("card_exited")
 
 
-func _on_card_removed(card):
+func on_card_removed(card):
 	card.disconnect("card_dropped", self, "_on_card_dropped")
-	print("card removed: ", str(card))
 	if _cards.size() > 0 and card == _cards.back():
 		_cards.pop_back()
-	card.modulate = Color.white
 	_highlight_top_card()
+	card.modulate = Color.white
+	emit_signal("card_removed", card)
 	
 
 func _on_card_dropped(card):
-	print("card dropped: ", str(card))
 	emit_signal("card_placed")
 	if not has_card(card) and _cards.size() + 1 <= capacity:
 		_add_card(card)
 		return
 	if has_card(card):
 		if card.overlaps(self):
-			print("card already on holder: ", str(card))
 			_snap(card)
 			_highlight_top_card()
 			return
-		emit_signal("card_removed", card)
-		return;		
+		on_card_removed(card)
 	
 	
 func get_sensor():

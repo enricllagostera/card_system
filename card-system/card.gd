@@ -61,13 +61,13 @@ func _on_mouse_exited():
 
 func _on_card_entered_area(area):
 	if area is HolderArea:
-		area.holder.emit_signal("card_entered", self)
+		area.holder.on_card_entered(self)
 
 
 func _on_card_exited_area(area):
 	if area is HolderArea:
-		area.holder.emit_signal("card_exited", self)
-
+		area.holder.on_card_exited(self)
+	
 
 func overlaps(holder) -> bool:
 	return $Sensor.overlaps_area (holder.get_sensor())
