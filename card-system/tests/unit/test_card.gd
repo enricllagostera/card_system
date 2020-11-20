@@ -3,9 +3,10 @@ extends "res://addons/gut/test.gd"
 var CardScene = load("res://card-system/card.tscn")
 var card_scene
 
-func before_all():
+
+func before_each():
 	card_scene = CardScene.instance()
-	add_child(card_scene)
+	add_child_autofree(card_scene)
 
 func test_init_setup():
 	assert_almost_eq(card_scene.rect_pivot_offset, card_scene.rect_size / 2, Vector2(0.5, 0.5))
