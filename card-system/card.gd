@@ -17,12 +17,10 @@ func _gui_input(event):
 		_is_grabbing = event.pressed
 		if event.pressed:
 			_grabbed_offset = rect_position - get_global_mouse_position()
-			print("pick")
 			_rotate_on_interaction()
 			emit_signal("card_picked", self)
 	if event is InputEventMouseButton:
 		if not event.pressed:
-			print("drop")			
 			_rotate_on_interaction()
 			emit_signal("card_dropped", self)	
 
@@ -37,37 +35,49 @@ func _process(_delta):
 		rect_position = get_global_mouse_position() + _grabbed_offset
 
 
-func _ready():
+func _init():
 	rect_pivot_offset = rect_size / 2
-	$Visual.rect_pivot_offset = rect_size / 2
-	$Sensor.position = rect_pivot_offset
-	connect("mouse_entered", self, "_on_mouse_entered")
-	connect("mouse_exited", self, "_on_mouse_exited")
-	$Sensor.connect("area_entered", self, "_on_card_entered_area")
-	$Sensor.connect("area_exited", self, "_on_card_exited_area")
+	_cursor_over = false
+
+
+func _notification(what):
+	if what == NOTIFICATION_MOUSE_ENTER:
+		_mouse_entered()
+	if what == NOTIFICATION_MOUSE_EXIT:
+		_mouse_exited()
+
+
+func _ready():
+	$Visual.rect_pivot_offset = self.rect_size / 2
+	_connect_sensor()
 	$AnimationPlayer.play("idle")
 
 
-func _on_mouse_entered():
+func _connect_sensor():
+	$Sensor.connect("area_entered", self, "_on_card_entered_area")
+	$Sensor.connect("area_exited", self, "_on_card_exited_area")
+
+
+func _mouse_entered():
 	_cursor_over = true
 	get_parent().move_child(self, get_parent().get_child_count()-1)
 	$AnimationPlayer.play("hover")
 
 
-func _on_mouse_exited():
+func _mouse_exited():
 	_cursor_over = false
 	$AnimationPlayer.play("idle")
 
 
 func _on_card_entered_area(area):
 	if area is HolderArea:
-		area.holder.emit_signal("card_entered", self)
+		area.holder.on_card_entered(self)
 
 
 func _on_card_exited_area(area):
 	if area is HolderArea:
-		area.holder.emit_signal("card_exited", self)
-
+		area.holder.on_card_exited(self)
+	
 
 func overlaps(holder) -> bool:
 	return $Sensor.overlaps_area (holder.get_sensor())
