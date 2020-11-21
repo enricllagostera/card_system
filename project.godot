@@ -39,16 +39,19 @@ _global_script_class_icons={
 [application]
 
 config/name="CardSystem"
-run/main_scene="res://TestScene.tscn"
+run/main_scene="res://card-system/tests/tests.tscn"
 
 [display]
 
-window/size/width=600
-window/size/height=800
+window/size/width=900
 window/size/resizable=false
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gut" )
 
 [rendering]
 

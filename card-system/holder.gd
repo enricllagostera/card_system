@@ -14,8 +14,12 @@ signal card_placed
 signal card_removed
 
 
-func _ready():
+func _init():
 	rect_pivot_offset = rect_size / 2
+	_cards = []
+
+
+func _ready():
 	$Sensor.holder = self
 	$Sensor.position = rect_pivot_offset
 	$Visual.rect_pivot_offset = rect_pivot_offset
