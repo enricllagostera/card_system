@@ -10,8 +10,6 @@ func before_each():
 
 func test_init_setup():
 	assert_almost_eq(card_scene.rect_pivot_offset, card_scene.rect_size / 2, Vector2(0.5, 0.5))
-	assert_connected(card_scene, card_scene, "mouse_entered", "mouse_entered")
-	assert_connected(card_scene, card_scene, "mouse_exited", "mouse_exited")
 
 func test_sensor_setup():
 	var sensor = card_scene.get_node("Sensor")

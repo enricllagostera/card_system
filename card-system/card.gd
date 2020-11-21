@@ -17,12 +17,10 @@ func _gui_input(event):
 		_is_grabbing = event.pressed
 		if event.pressed:
 			_grabbed_offset = rect_position - get_global_mouse_position()
-			print("pick")
 			_rotate_on_interaction()
 			emit_signal("card_picked", self)
 	if event is InputEventMouseButton:
 		if not event.pressed:
-			print("drop")			
 			_rotate_on_interaction()
 			emit_signal("card_dropped", self)	
 
@@ -40,8 +38,13 @@ func _process(_delta):
 func _init():
 	rect_pivot_offset = rect_size / 2
 	_cursor_over = false
-	connect("mouse_entered", self, "mouse_entered")
-	connect("mouse_exited", self, "mouse_exited")
+
+
+func _notification(what):
+	if what == NOTIFICATION_MOUSE_ENTER:
+		_mouse_entered()
+	if what == NOTIFICATION_MOUSE_EXIT:
+		_mouse_exited()
 
 
 func _ready():
@@ -55,13 +58,13 @@ func _connect_sensor():
 	$Sensor.connect("area_exited", self, "_on_card_exited_area")
 
 
-func mouse_entered():
+func _mouse_entered():
 	_cursor_over = true
 	get_parent().move_child(self, get_parent().get_child_count()-1)
 	$AnimationPlayer.play("hover")
 
 
-func mouse_exited():
+func _mouse_exited():
 	_cursor_over = false
 	$AnimationPlayer.play("idle")
 
