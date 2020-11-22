@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
-var DeckScript = load("res://card-system/deck.gd")
-var CardScript = load("res://card-system/card.gd")
+var DeckScript = load("res://card_system/deck.gd")
+var CardScript = load("res://card_system/card.gd")
 var deck
 var card
 

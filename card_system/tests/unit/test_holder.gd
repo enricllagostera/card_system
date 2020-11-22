@@ -1,8 +1,8 @@
 extends "res://addons/gut/test.gd"
 
-var HolderScene = load("res://card-system/holder.tscn")
+var HolderScene = load("res://card_system/holder.tscn")
 var holder
-var Card = load("res://card-system/card.tscn")
+var Card = load("res://card_system/card.tscn")
 
 
 func before_each():

@@ -1,6 +1,6 @@
 extends "res://addons/gut/test.gd"
 
-var CardScene = load("res://card-system/card.tscn")
+var CardScene = load("res://card_system/card.tscn")
 var card_scene
 
 

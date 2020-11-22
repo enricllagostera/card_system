@@ -12,22 +12,22 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "Card",
 "language": "GDScript",
-"path": "res://card-system/card.gd"
+"path": "res://card_system/card.gd"
 }, {
 "base": "Node",
 "class": "Deck",
 "language": "GDScript",
-"path": "res://card-system/deck.gd"
+"path": "res://card_system/deck.gd"
 }, {
 "base": "Control",
 "class": "Holder",
 "language": "GDScript",
-"path": "res://card-system/holder.gd"
+"path": "res://card_system/holder.gd"
 }, {
 "base": "Area2D",
 "class": "HolderArea",
 "language": "GDScript",
-"path": "res://card-system/holder_area.gd"
+"path": "res://card_system/holder_area.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "SfxPlayer",
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="CardSystem"
-run/main_scene="res://card-system/tests/tests.tscn"
+run/main_scene="res://card_system/tests/tests.tscn"
 
 [display]
 

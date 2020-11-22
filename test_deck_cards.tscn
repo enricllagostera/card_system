@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://card-system/deck.gd" type="Script" id=1]
+[ext_resource path="res://card_system/deck.gd" type="Script" id=1]
 [ext_resource path="res://deck_cards.gd" type="Script" id=2]
 
 [node name="Test_Deck_Cards" type="Node2D"]
