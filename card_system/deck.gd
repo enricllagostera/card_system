@@ -10,8 +10,10 @@ export var capacity := UNLIMITED_CAPACITY setget set_capacity, get_capacity
 
 signal card_added
 signal card_added_fail_overcapacity
+signal card_added_fail_no_duplicates
 signal card_dealt
 signal card_dealt_fail_empty
+signal deck_shuffled
 
 
 func _init():
@@ -23,6 +25,10 @@ func card_count() -> int:
 
 
 func add_card(card:Card) -> void:
+    if _cards.has(card):
+        emit_signal("card_added_fail_no_duplicates")
+        return
+
     if (capacity == UNLIMITED_CAPACITY):
         _cards.append(card)
         emit_signal("card_added")
@@ -49,3 +55,18 @@ func deal_card() -> Card:
     else:
         emit_signal("card_dealt_fail_empty")
     return result
+
+
+func random_shuffle():
+    randomize()
+    _shuffle()
+
+
+func _shuffle():
+    _cards.shuffle()
+    emit_signal("deck_shuffled")
+
+
+func repeatable_shuffle(new_seed:int):
+    seed(new_seed)
+    _shuffle()
