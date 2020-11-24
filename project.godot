@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="CardSystem"
+config/name="card_system"
 run/main_scene="res://card_system/tests/tests.tscn"
 
 [display]
