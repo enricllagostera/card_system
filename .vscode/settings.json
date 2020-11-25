@@ -2,5 +2,7 @@
     "cSpell.words": [
         "autofree",
         "setget"
-    ]
+    ],
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": false
 }
