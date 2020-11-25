@@ -5,7 +5,6 @@
 [ext_resource path="res://audio/cardPlace3.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sfx_player.gd" type="Script" id=4]
 
-
 [node name="TestHolderCards" type="Node2D"]
 __meta__ = {
 "_edit_vertical_guides_": [ 50.1418, 550.0 ]

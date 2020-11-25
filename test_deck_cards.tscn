@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://card_system/deck.gd" type="Script" id=1]
 [ext_resource path="res://deck_cards.gd" type="Script" id=2]
+[ext_resource path="res://card_system/holder.tscn" type="PackedScene" id=3]
 
 [node name="Test_Deck_Cards" type="Node2D"]
 script = ExtResource( 2 )
@@ -30,5 +31,11 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Holder" parent="." instance=ExtResource( 3 )]
+margin_left = 430.0
+margin_top = 50.0
+margin_right = 530.0
+margin_bottom = 250.0
 [connection signal="button_up" from="DealButton" to="." method="_on_DealButton_button_up"]
 [connection signal="button_up" from="AddButton" to="." method="_on_AddButton_button_up"]

@@ -8,6 +8,8 @@ var _is_grabbing
 var _cursor_over
 var _grabbed_offset
 
+var id := 0 setget set_id, get_id
+
 signal card_picked
 signal card_dropped
 
@@ -36,6 +38,7 @@ func _process(_delta):
 
 
 func _init():
+	set_id()
 	rect_pivot_offset = rect_size / 2
 	_cursor_over = false
 
@@ -81,3 +84,14 @@ func _on_card_exited_area(area):
 
 func overlaps(holder) -> bool:
 	return $Sensor.overlaps_area (holder.get_sensor())
+
+
+func set_id(new_id:int = -1):
+	if new_id < 0:
+		id = get_instance_id()
+		return
+	id = new_id
+
+
+func get_id()->int:
+	return id

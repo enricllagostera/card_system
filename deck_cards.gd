@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var CardScene = load("res://card-system/card.tscn")
+var CardScene = load("res://card_system/card.tscn")
 
 
 func _ready():
