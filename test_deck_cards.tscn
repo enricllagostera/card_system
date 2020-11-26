@@ -37,5 +37,6 @@ margin_left = 430.0
 margin_top = 50.0
 margin_right = 530.0
 margin_bottom = 250.0
+capacity = 100
 [connection signal="button_up" from="DealButton" to="." method="_on_DealButton_button_up"]
 [connection signal="button_up" from="AddButton" to="." method="_on_AddButton_button_up"]

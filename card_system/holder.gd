@@ -33,6 +33,17 @@ func _highlight_top_card():
 		card.modulate = Color.black
 	_cards.back().modulate = Color.white
 	_cards.back().mouse_filter = MOUSE_FILTER_STOP
+	# var _aux = $Tween.interpolate_property(_cards.back(), "rect_scale", null, Vector2(0, 1), 0.1, Tween.TRANS_SINE)
+	# _aux = $Tween.connect("tween_completed", self, "_continue_flip")
+	# $Tween.start()
+	
+	
+func _continue_flip(object, _key):
+	object.modulate = Color.white
+	object.mouse_filter = MOUSE_FILTER_STOP
+	var _aux = $Tween.interpolate_property(object, "rect_scale", null, Vector2(1, 1), 0.1, Tween.TRANS_SINE)
+	$Tween.disconnect("tween_completed", self, "_continue_flip")
+
 
 
 func _snap(card):

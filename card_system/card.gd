@@ -57,8 +57,8 @@ func _ready():
 
 
 func _connect_sensor():
-	$Sensor.connect("area_entered", self, "_on_card_entered_area")
-	$Sensor.connect("area_exited", self, "_on_card_exited_area")
+	var _aux = $Sensor.connect("area_entered", self, "_on_card_entered_area")
+	_aux = $Sensor.connect("area_exited", self, "_on_card_exited_area")
 
 
 func _mouse_entered():

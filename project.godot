@@ -53,10 +53,13 @@ _global_script_class_icons={
 config/name="card_system"
 run/main_scene="res://card_system/tests/tests.tscn"
 
+[debug]
+
+gdscript/warnings/treat_warnings_as_errors=true
+
 [display]
 
 window/size/width=900
-window/size/resizable=false
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

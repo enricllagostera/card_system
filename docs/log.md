@@ -30,3 +30,5 @@ Outra coisa que vou experimentar agora é com carregar informações para cartas
 4. Usar o dicionário para inicializar um conjunto de cartas em um deck;
 
 (...) Funcionou bem fazer isso (até o 3o item). Fiz uma carta que carregava um texto para um `Label` de um arquivo JSON com apenas um campo nele. Agora acho que seria o caso de criar um banco de dados de cartas, ao invés de um arquivo por carta.
+
+(...) Acabei preparando uma classe específica para bancos de cartas (`CardDb`), que carrega um dicionário com as informações. Por enquanto só tem a função de carregar do arquivo, mas que trata erros corretamente.

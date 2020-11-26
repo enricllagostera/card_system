@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tall-holder.png-327b719e0f74014956225d11d80152ac.stex"
+path="res://.import/tall-card.png-fbcf52e7ba591b5b00a5a629ca4abee9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/tall-holder.png"
-dest_files=[ "res://.import/tall-holder.png-327b719e0f74014956225d11d80152ac.stex" ]
+source_file="res://card_system/images/tall-card.png"
+dest_files=[ "res://.import/tall-card.png-fbcf52e7ba591b5b00a5a629ca4abee9.stex" ]
 
 [params]
 

@@ -5,7 +5,7 @@ var CardScene = load("res://card_system/card.tscn")
 
 
 func _ready():
-	$Deck.connect("card_dealt", self, "_on_card_dealt")
+	var _aux = $Deck.connect("card_dealt", self, "_on_card_dealt")
 
 
 func _on_DealButton_button_up():
