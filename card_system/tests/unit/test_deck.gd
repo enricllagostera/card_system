@@ -70,6 +70,12 @@ func test_random_shuffle():
 	assert_signal_emitted(deck, "deck_shuffled")
 
 
+func test_peek_card():
+	assert_null(deck.peek_card())
+	deck.add_card(card)
+	assert_eq(deck.peek_card(), card)
+
+
 func get_deck_order(cards):
 	var deck_new_order = []
 	for c in cards:

@@ -48,6 +48,10 @@ func get_capacity():
     return capacity
 
 
+func peek_card() -> Card:
+	return _cards.back()
+
+
 func deal_card() -> Card:
     var result = _cards.pop_back()
     if result != null:

@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://card_system/card.gd"
 }, {
+"base": "Node",
+"class": "CardDb",
+"language": "GDScript",
+"path": "res://card_system/card_db.gd"
+}, {
 "base": "Control",
 "class": "CardFromJSON",
 "language": "GDScript",
@@ -38,14 +43,21 @@ _global_script_classes=[ {
 "class": "SfxPlayer",
 "language": "GDScript",
 "path": "res://sfx_player.gd"
+}, {
+"base": "Node2D",
+"class": "Workshop",
+"language": "GDScript",
+"path": "res://workshop.gd"
 } ]
 _global_script_class_icons={
 "Card": "",
+"CardDb": "",
 "CardFromJSON": "",
 "Deck": "",
 "Holder": "",
 "HolderArea": "",
-"SfxPlayer": ""
+"SfxPlayer": "",
+"Workshop": ""
 }
 
 [application]
