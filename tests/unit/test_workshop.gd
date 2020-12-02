@@ -1,6 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 var Wksp = load("res://workshop.tscn")
+var Floppy = load("res://floppy.gd")
 var wksp
 
 
@@ -19,10 +20,12 @@ func test_new_workshop():
 
 func test_loaded_floppies():
 	assert_gt((wksp as Workshop).deck.card_count(), 0)
-	assert_eq(wksp.deck.peek_card().get_label(), "floppy 02")
+	assert_is(wksp.deck.peek_card(), Floppy)
+	assert_eq(wksp.deck.peek_card().get_label(), "floppy 04")
 
 
 func test_fill_tabletop():
+	var count = wksp.deck.card_count()
 	wksp.fill_tabletop()
 	assert_gt(wksp.tabletop.get_child_count(), 0)
-	assert_eq(wksp.deck.card_count(), 0)
+	assert_eq(wksp.deck.card_count(), count - 2)

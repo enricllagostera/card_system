@@ -14,6 +14,25 @@ signal card_picked
 signal card_dropped
 
 
+func _init():
+	set_id()
+	rect_pivot_offset = rect_size / 2
+	_cursor_over = false
+
+
+func _ready():
+	$Visual.rect_pivot_offset = self.rect_size / 2
+	_connect_sensor()
+	$AnimationPlayer.play("idle")
+	$Sensor.position = self.rect_pivot_offset
+	$"Sensor/CollisionShape2D".shape.extents = rect_size * 0.5
+
+
+func _connect_sensor():
+	var _aux = $Sensor.connect("area_entered", self, "_on_card_entered_area")
+	_aux = $Sensor.connect("area_exited", self, "_on_card_exited_area")
+
+
 func _gui_input(event):
 	if event is InputEventMouseButton and _cursor_over:
 		_is_grabbing = event.pressed
@@ -37,28 +56,11 @@ func _process(_delta):
 		rect_position = get_global_mouse_position() + _grabbed_offset
 
 
-func _init():
-	set_id()
-	rect_pivot_offset = rect_size / 2
-	_cursor_over = false
-
-
 func _notification(what):
 	if what == NOTIFICATION_MOUSE_ENTER:
 		_mouse_entered()
 	if what == NOTIFICATION_MOUSE_EXIT:
 		_mouse_exited()
-
-
-func _ready():
-	$Visual.rect_pivot_offset = self.rect_size / 2
-	_connect_sensor()
-	$AnimationPlayer.play("idle")
-
-
-func _connect_sensor():
-	var _aux = $Sensor.connect("area_entered", self, "_on_card_entered_area")
-	_aux = $Sensor.connect("area_exited", self, "_on_card_exited_area")
 
 
 func _mouse_entered():
@@ -82,10 +84,6 @@ func _on_card_exited_area(area):
 		area.holder.on_card_exited(self)
 	
 
-func overlaps(holder) -> bool:
-	return $Sensor.overlaps_area (holder.get_sensor())
-
-
 func set_id(new_id:int = -1):
 	if new_id < 0:
 		id = get_instance_id()
@@ -95,3 +93,18 @@ func set_id(new_id:int = -1):
 
 func get_id()->int:
 	return id
+
+
+func move_to(position, duration):
+	$Tween.interpolate_property(self, "rect_position", rect_position, position, duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
+func move_to_with_callback(position, duration, object = null, callback = ""):
+	move_to(position, duration)
+	if object != null and callback != "":
+		$Tween.interpolate_callback(object, duration, callback)
+
+
+func overlaps(holder) -> bool:
+	return $Sensor.overlaps_area (holder.get_sensor())

@@ -4,5 +4,11 @@
 	},
 	"floppy02": {
 		"label": "floppy 02"
+	},
+	"floppy03": {
+		"label": "floppy 03"
+	},
+	"floppy04": {
+		"label": "floppy 04"
 	}
 }

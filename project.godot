@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://card_system/deck.gd"
 }, {
+"base": "Holder",
+"class": "Driver",
+"language": "GDScript",
+"path": "res://driver.gd"
+}, {
+"base": "Card",
+"class": "Floppy",
+"language": "GDScript",
+"path": "res://floppy.gd"
+}, {
 "base": "Control",
 "class": "Holder",
 "language": "GDScript",
@@ -54,6 +64,8 @@ _global_script_class_icons={
 "CardDb": "",
 "CardFromJSON": "",
 "Deck": "",
+"Driver": "",
+"Floppy": "",
 "Holder": "",
 "HolderArea": "",
 "SfxPlayer": "",

@@ -10,6 +10,8 @@ func before_each():
 
 
 func test_init_setup():
+	var collision_shape = card_scene.get_node("Sensor/CollisionShape2D")
+	assert_almost_eq(collision_shape.shape.extents, card_scene.rect_size / 2, Vector2(0.5, 0.5))
 	assert_almost_eq(card_scene.rect_pivot_offset, card_scene.rect_size / 2, Vector2(0.5, 0.5))
 
 

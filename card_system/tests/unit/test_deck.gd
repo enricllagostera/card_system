@@ -72,6 +72,7 @@ func test_random_shuffle():
 
 func test_peek_card():
 	assert_null(deck.peek_card())
+	assert_signal_emitted(deck, "peek_card_empty")
 	deck.add_card(card)
 	assert_eq(deck.peek_card(), card)
 

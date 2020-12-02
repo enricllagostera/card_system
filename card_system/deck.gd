@@ -14,6 +14,7 @@ signal card_added_fail_no_duplicates
 signal card_dealt
 signal card_dealt_fail_empty
 signal deck_shuffled
+signal peek_card_empty
 
 
 func _init():
@@ -49,6 +50,9 @@ func get_capacity():
 
 
 func peek_card() -> Card:
+	if _cards.size() == 0:
+		emit_signal("peek_card_empty")
+		return null
 	return _cards.back()
 
 
