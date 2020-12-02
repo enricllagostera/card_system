@@ -36,3 +36,7 @@ Outra coisa que vou experimentar agora é com carregar informações para cartas
 (...) Funcionou bem fazer isso (até o 3o item). Fiz uma carta que carregava um texto para um `Label` de um arquivo JSON com apenas um campo nele. Agora acho que seria o caso de criar um banco de dados de cartas, ao invés de um arquivo por carta.
 
 (...) Acabei preparando uma classe específica para bancos de cartas (`CardDb`), que carrega um dicionário com as informações. Por enquanto só tem a função de carregar do arquivo, mas que trata erros corretamente.
+
+### 2020-12-02
+
+Tenho feito um protótipo do jogo dos disquetes, usando o sistema, e estou encontrando algumas limitações de usar ele. Uma coisa que quero mudar é que estou usando relações de pai -> filho para representar onde uma carta está e isso simplesmente não funciona bem. A ideia é mudar isso para um componente mais simples, que pode ser contido em decks, holders e outros nós. Com isso ficaria um pouco mais simples lidar com adicionar / remover e checar capacidade. Atualmente isso acaba sendo duplicado em vários lugares.

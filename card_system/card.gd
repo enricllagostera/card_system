@@ -8,7 +8,9 @@ var _is_grabbing
 var _cursor_over
 var _grabbed_offset
 
-var id := 0 setget set_id, get_id
+var uuid_util = preload("res://card_system/uuid/uuid.gd")
+
+var id = "" setget set_id, get_id
 
 signal card_picked
 signal card_dropped
@@ -84,14 +86,14 @@ func _on_card_exited_area(area):
 		area.holder.on_card_exited(self)
 	
 
-func set_id(new_id:int = -1):
-	if new_id < 0:
-		id = get_instance_id()
+func set_id(new_id = ""):
+	if new_id == "":
+		id = uuid_util.v4()
 		return
 	id = new_id
 
 
-func get_id()->int:
+func get_id():
 	return id
 
 

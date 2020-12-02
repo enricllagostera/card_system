@@ -24,10 +24,8 @@ func test_sensor_setup():
 
 
 func test_id_accessors():
-	var id = card_scene.get_instance_id();
-	assert_accessors(card_scene,"id", id, 2)
+	assert_accessors(card_scene,"id", card_scene.get_id(), "2")
 	card_scene.set_id()
-	assert_eq(id, card_scene.get_id(), "Default id is the node id.")
 	var card2 = CardScene.instance()
 	add_child_autofree(card2)
 	assert_ne(card_scene.id, card2.id, "Two cards should have different ids by default.")
