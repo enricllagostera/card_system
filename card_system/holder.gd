@@ -2,7 +2,7 @@ extends Control
 
 class_name Holder
 
-var _cards = []
+var _cards:CardContainer = null
 
 export(int) var capacity = 1
 export(bool) var snap_on_drop = true
@@ -16,8 +16,8 @@ signal card_removed
 
 
 func _init():
+	_cards = CardContainer.new()
 	rect_pivot_offset = rect_size / 2
-	_cards = []
 	
 	
 func _ready():
@@ -29,13 +29,13 @@ func _ready():
 
 
 func _highlight_top_card():
-	if _cards.size() == 0:
+	if _cards.count() == 0:
 		return
-	for card in _cards:
-		card.mouse_filter = MOUSE_FILTER_IGNORE
-		card.modulate = Color.black
-	_cards.back().modulate = Color.white
-	_cards.back().mouse_filter = MOUSE_FILTER_STOP
+	for c in _cards._cards:
+		c.mouse_filter = MOUSE_FILTER_IGNORE
+		c.modulate = Color.black
+	_cards.peek_last().modulate = Color.white
+	_cards.peek_last().mouse_filter = MOUSE_FILTER_STOP
 
 	
 func _continue_flip(object, _key):
@@ -52,8 +52,8 @@ func _snap(card):
 		$Tween.start()
 			
 
-func _add_card(card):
-	_cards.append(card)
+func _add(card):
+	_cards.add(card)
 	_snap(card)
 	_highlight_top_card()
 	emit_signal("card_added")
@@ -77,8 +77,8 @@ func on_card_removed(card):
 
 func _on_card_dropped(card):
 	emit_signal("card_placed")
-	if not has_card(card) and _cards.size() + 1 <= capacity:
-		_add_card(card)
+	if not has_card(card) and count() + 1 <= capacity:
+		_add(card)
 		return
 	if has_card(card):
 		if card.overlaps(self):
@@ -93,31 +93,25 @@ func get_sensor():
 
 
 func has_card(card):
-	return _cards.has(card)
+	return _cards.has(card.id)
 
 
 func remove(card):
 	card.disconnect("card_dropped", self, "_on_card_dropped")
-	if _cards.size() > 0 and card == _cards.back():
-		_cards.pop_back()
+	if count() > 0 and card == _cards.peek_last():
+		_cards.remove_last()
 	_highlight_top_card()
 	card.modulate = Color.white
 	emit_signal("card_removed", card)
 
 
-func peek_top():
-	if _cards.size() > 0:
-		return _cards.back()
-	return null
+func peek_last():
+	return _cards.peek_last()
 
 
 func remove_from_top():
-	if card_count() > 0:
-		var card = _cards.back()
-		remove(_cards.back())
-		return card
-	return null
+	return _cards.remove_last()
 
 
-func card_count():
-	return _cards.size()
+func count():
+	return _cards.count()

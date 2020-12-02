@@ -15,19 +15,19 @@ func before_each():
 
 
 func test_init():
-	assert_eq(deck.card_count(), 0, "Start with a deck without cards.")
+	assert_eq(deck.count(), 0, "Start with a deck without cards.")
 
 
 func test_add_card():
 	deck.add(card)
-	assert_eq(deck.card_count(), 1, "Add one card to the deck.")
+	assert_eq(deck.count(), 1, "Add one card to the deck.")
 
 
 func test_add_card_no_duplicates():
 	deck.set_capacity(deck.UNLIMITED_CAPACITY)
 	deck.add(card)
 	deck.add(card)
-	assert_eq(deck.card_count(), 1, "A card instance cannot be added twice to a deck.")
+	assert_eq(deck.count(), 1, "A card instance cannot be added twice to a deck.")
 
 
 func test_add_card_over_capacity():
@@ -36,7 +36,7 @@ func test_add_card_over_capacity():
 	deck.add(card)
 	var card2 = double(CardScript).new()
 	deck.add(card2)
-	assert_eq(deck.card_count(), 1)
+	assert_eq(deck.count(), 1)
 
 
 func test_capacity_setup():
@@ -45,17 +45,17 @@ func test_capacity_setup():
 
 func test_deal_card_single():
 	deck.add(card)
-	var dealt = deck.deal_card()
+	var dealt = deck.deal()
 	assert_signal_emitted(deck, "card_dealt")
-	assert_eq(deck.card_count(), 0)
+	assert_eq(deck.count(), 0)
 	assert_not_null(dealt)
 
 
 func test_deal_card_empty_deck():
-	var dealt = deck.deal_card()
+	var dealt = deck.deal()
 	assert_signal_emitted(deck, "card_dealt_fail_empty")
 	assert_null(dealt)
-	assert_eq(deck.card_count(), 0)
+	assert_eq(deck.count(), 0)
 
 
 func test_random_shuffle():

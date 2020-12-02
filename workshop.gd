@@ -24,10 +24,10 @@ func _ready():
 func fill_tabletop():
 	var diskettes_needed = tabletop_capacity - $Tabletop.get_child_count()
 	for _i in range(0, diskettes_needed):
-		if deck.card_count() == 0:
+		if deck.count() == 0:
 			_refill_player_deck()
-		if deck.card_count() > 0:
-			var c = deck.deal_card()
+		if deck.count() > 0:
+			var c = deck.deal()
 			c.rect_position = Vector2(0,0)
 			tabletop.add_child(c)
 			
@@ -41,10 +41,10 @@ func _on_EndTurnButton_button_up():
 	print("end turn btn")
 	turns += 1
 	for h in $Holders.get_children():
-		if (h as Holder).card_count() > 0:
+		if (h as Holder).count() > 0:
 			var res = h.run()
 			for c in res:
-				discard_deck.add_card(c)	
+				discard_deck.add(c)	
 
 
 func _on_floppy_discarded(card, _key):
@@ -53,7 +53,7 @@ func _on_floppy_discarded(card, _key):
 
 func _refill_player_deck():
 	print("refilling deck")
-	for i in discard_deck.card_count():
-		var card = discard_deck.deal_card()
-		deck.add_card(card)
+	for i in discard_deck.count():
+		var card = discard_deck.deal()
+		deck.add(card)
 	deck.random_shuffle()

@@ -17,7 +17,7 @@ func _init():
 	_cards = CardContainer.new()
 
 
-func card_count() -> int:
+func count() -> int:
     return _cards.count()
 
 
@@ -37,7 +37,7 @@ func peek_top() -> Card:
 	return _cards.peek_last()
 
 
-func deal_card() -> Card:
+func deal() -> Card:
     var result = _cards.remove_last()
     if result != null:
         emit_signal("card_dealt", result)
