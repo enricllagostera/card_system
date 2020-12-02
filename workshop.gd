@@ -18,7 +18,7 @@ func _ready():
 	for card_id in initial_data.keys():
 		var new_floppy = FloppyScene.instance()
 		new_floppy.set_label(initial_data[card_id].label)
-		deck.add_card(new_floppy)
+		deck.add(new_floppy)
 	
 
 func fill_tabletop():

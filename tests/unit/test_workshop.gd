@@ -20,8 +20,8 @@ func test_new_workshop():
 
 func test_loaded_floppies():
 	assert_gt((wksp as Workshop).deck.card_count(), 0)
-	assert_is(wksp.deck.peek_card(), Floppy)
-	assert_eq(wksp.deck.peek_card().get_label(), "floppy 04")
+	assert_is(wksp.deck.peek_top(), Floppy)
+	assert_eq(wksp.deck.peek_top().get_label(), "floppy 04")
 
 
 func test_fill_tabletop():

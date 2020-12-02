@@ -40,3 +40,7 @@ Outra coisa que vou experimentar agora é com carregar informações para cartas
 ### 2020-12-02
 
 Tenho feito um protótipo do jogo dos disquetes, usando o sistema, e estou encontrando algumas limitações de usar ele. Uma coisa que quero mudar é que estou usando relações de pai -> filho para representar onde uma carta está e isso simplesmente não funciona bem. A ideia é mudar isso para um componente mais simples, que pode ser contido em decks, holders e outros nós. Com isso ficaria um pouco mais simples lidar com adicionar / remover e checar capacidade. Atualmente isso acaba sendo duplicado em vários lugares.
+
+(...) Criei a classe base `CardContainer`, agora vou começar a refazer `Deck` e `Holder` para utilizarem essa classe como componente.
+
+(...) `Deck` está re-feito. Agora seria o caso de começar a alterar `Holder`.

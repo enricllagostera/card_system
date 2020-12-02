@@ -4,41 +4,25 @@ class_name Deck
 
 const UNLIMITED_CAPACITY := -1
 
-var _cards := []
+var _cards :CardContainer
 
 export var capacity := UNLIMITED_CAPACITY setget set_capacity, get_capacity
 
-signal card_added
-signal card_added_fail_overcapacity
-signal card_added_fail_no_duplicates
 signal card_dealt
 signal card_dealt_fail_empty
 signal deck_shuffled
-signal peek_card_empty
 
 
 func _init():
-    _cards = []
+	_cards = CardContainer.new()
 
 
 func card_count() -> int:
-    return _cards.size()
+    return _cards.count()
 
 
-func add_card(card:Card) -> void:
-    if _cards.has(card):
-        emit_signal("card_added_fail_no_duplicates")
-        return
-
-    if (capacity == UNLIMITED_CAPACITY):
-        _cards.append(card)
-        emit_signal("card_added")
-        return
-    if card_count() + 1 <= capacity:
-        _cards.append(card)
-        emit_signal("card_added")
-        return;
-    emit_signal("card_added_fail_overcapacity")
+func add(card:Card) -> void:
+	_cards.add(card)
 
 
 func set_capacity(new_capacity):
@@ -49,15 +33,12 @@ func get_capacity():
     return capacity
 
 
-func peek_card() -> Card:
-	if _cards.size() == 0:
-		emit_signal("peek_card_empty")
-		return null
-	return _cards.back()
+func peek_top() -> Card:
+	return _cards.peek_last()
 
 
 func deal_card() -> Card:
-    var result = _cards.pop_back()
+    var result = _cards.remove_last()
     if result != null:
         emit_signal("card_dealt", result)
     else:
@@ -70,11 +51,15 @@ func random_shuffle():
     _shuffle()
 
 
+func repeatable_shuffle(new_seed:int):
+    seed(new_seed)
+    _shuffle()
+
+
 func _shuffle():
     _cards.shuffle()
     emit_signal("deck_shuffled")
 
 
-func repeatable_shuffle(new_seed:int):
-    seed(new_seed)
-    _shuffle()
+func get_ids() -> Array:
+	return _cards.get_ids()

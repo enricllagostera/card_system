@@ -5,12 +5,12 @@ class_name CardContainer
 const UNLIMITED_CAPACITY = -1
 
 var capacity := UNLIMITED_CAPACITY setget set_capacity, get_capacity
+var _cards = []
 
-# This class stores cards in an "ordered" dictionary, basically relying in GDScript implementation in 3.0 keeping the order of addition. This could become a problem.
-var _cards = {}
-
+signal added_card
 signal added_card_already_in_container
 signal added_card_over_capacity
+signal removed_card
 signal removed_card_container_was_empty
 signal removed_card_id_not_found
 
@@ -29,9 +29,10 @@ func get_capacity():
 
 
 func add(card:Card):
-	if not _cards.has(card.get_id()):
+	if not has(card.id):
 		if count() + 1 <= capacity or capacity == UNLIMITED_CAPACITY:
-			_cards[card.get_id()] = card
+			_cards.append(card)
+			emit_signal("added_card")
 		else:
 			emit_signal("added_card_over_capacity")
 	else:
@@ -42,11 +43,17 @@ func count():
 	return _cards.size()
 
 
+func get_ids() -> Array:
+	var ids = []
+	for c in _cards:
+		ids.append(c.id)
+	return ids
+
+
 func remove_last():
 	var res = null
 	if not _cards.empty():
-		var top_id = _cards.keys().back()
-		res = remove(top_id)
+		res = remove(_cards.back().id)
 	else:
 		emit_signal("removed_card_container_was_empty")
 	return res
@@ -54,10 +61,39 @@ func remove_last():
 
 func remove(id):
 	var res = null
-	if _cards.has(id):
-		res = _cards[id]
-		_cards.erase(id)
+	var i = _find_index_by_id(id)
+	if i >= 0:
+		res = _cards[i]
+		_cards.remove(i)
+		emit_signal("removed_card")
 	else:
 		emit_signal("removed_card_id_not_found")
 	return res
-	
+
+
+func peek_last():
+	if not _cards.empty():
+		return _cards.back()
+	return null
+
+
+func _find_index_by_id(id):
+	for c in range(_cards.size()):
+		if _cards[c].get_id() == id:
+			return c
+	return -1
+
+
+func _find_by_id(id):
+	var i = _find_index_by_id(id)
+	if i >= 0:
+		return _cards[i]
+	return -1
+
+
+func has(id) -> bool:
+	return _find_index_by_id(id) >= 0
+
+
+func shuffle():
+	_cards.shuffle()
