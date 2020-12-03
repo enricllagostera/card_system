@@ -16,7 +16,7 @@ signal removed_card_id_not_found
 
 
 func _init():
-	pass
+	_cards = []
 
 
 func set_capacity(new_capacity):
@@ -88,7 +88,7 @@ func _find_by_id(id):
 	var i = _find_index_by_id(id)
 	if i >= 0:
 		return _cards[i]
-	return -1
+	return null
 
 
 func has(id) -> bool:

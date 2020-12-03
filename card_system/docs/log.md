@@ -43,4 +43,4 @@ Tenho feito um protótipo do jogo dos disquetes, usando o sistema, e estou encon
 
 (...) Criei a classe base `CardContainer`, agora vou começar a refazer `Deck` e `Holder` para utilizarem essa classe como componente.
 
-(...) `Deck` está re-feito. Agora seria o caso de começar a alterar `Holder`.
+(...) `Deck` está re-feito. Agora seria o caso de começar a alterar `Holder`. (...) Feito.
