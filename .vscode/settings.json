@@ -4,5 +4,9 @@
         "setget"
     ],
     "editor.detectIndentation": false,
-    "editor.insertSpaces": false
+	"editor.insertSpaces": false,
+	"conventionalCommits.scopes": [
+		"card_system",
+		"floppy_game"
+	]
 }

@@ -17,12 +17,23 @@ func _ready():
 	tabletop.capacity = tabletop_capacity
 	var initial_data = card_db.load()
 	for card_id in initial_data.keys():
-		var new_floppy = FloppyScene.instance()
-		add_child(new_floppy)
-		new_floppy.set_label(initial_data[card_id].label)
-		new_floppy.visible = false
+		var new_floppy = add_new_floppy(initial_data[card_id])
 		deck.add(new_floppy)
-	
+	# Driver connections
+	for h in $Holders.get_children():
+		var _c = h.connect("card_placed", self, "_on_driver_card_placed", [h])
+		_c = h.connect("card_removed", self, "_on_driver_card_removed", [h])
+	fill_tabletop()
+
+
+func add_new_floppy(data):
+	var new_floppy = FloppyScene.instance()
+	add_child(new_floppy)
+	new_floppy.data = data
+	new_floppy.set_label(data.label)
+	new_floppy.visible = false
+	return new_floppy
+
 
 func fill_tabletop():
 	var diskettes_needed = tabletop_capacity - tabletop.count()
@@ -30,10 +41,10 @@ func fill_tabletop():
 		if deck.count() == 0:
 			_refill_player_deck()
 		if deck.count() > 0:
-			var c = deck.deal()
+			var c = deck.peek_last()
 			c.rect_position = Vector2(0,0)
 			c.visible = true
-			tabletop.add(c)
+			CardContainer.switch(c, deck, tabletop)
 
 
 func _on_DealTurnButton_button_up():
@@ -48,26 +59,24 @@ func _on_EndTurnButton_button_up():
 		if (h as Holder).count() > 0:
 			var res = h.run()
 			for c in res:
-				discard_deck.add(c)
-
-
-func _on_floppy_discarded(card, _key):
-	card.visible = false
+				if c is Floppy:
+					CardContainer.switch(c, h, discard_deck)
+				else:
+					var new_floppy = add_new_floppy(c.data)
+					discard_deck.add(new_floppy)
+	fill_tabletop()
 
 
 func _refill_player_deck():
 	print("refilling deck")
 	for i in discard_deck.count():
-		var card = discard_deck.deal()
-		deck.add(card)
+		CardContainer.switch(discard_deck.peek_last(), discard_deck, deck)
 	deck.random_shuffle()
 
 
-
-func _on_drivers_card_removed(card):
-	if not discard_deck.has(card):
-		tabletop.add(card)
+func _on_driver_card_placed(card, driver):
+	CardContainer.switch(card, card.container, driver)
 
 
-func _on_drivers_card_added(card):
-	tabletop.remove(card)
+func _on_driver_card_removed(card, driver):
+	CardContainer.switch(card, driver, tabletop)
