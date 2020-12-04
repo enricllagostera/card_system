@@ -11,7 +11,7 @@ func before_each():
 
 
 func test_new_workshop():
-	# assert_eq(wksp.card_db.json_file_path, "res://all_diskettes_01.json")
+	assert_eq(wksp.card_db.json_file_path, "res://all_diskettes_01.json")
 	assert_is(wksp, Workshop)
 	assert_not_null(wksp.deck)
 	assert_not_null(wksp.discard_deck)
@@ -20,8 +20,8 @@ func test_new_workshop():
 
 func test_loaded_floppies():
 	assert_gt((wksp as Workshop).deck.count(), 0)
-	assert_is(wksp.deck.peek_top(), Floppy)
-	assert_eq(wksp.deck.peek_top().get_label(), "floppy 04")
+	assert_is(wksp.deck.peek_last(), Floppy)
+	assert_eq(wksp.deck.peek_last().get_label(), "floppy 04")
 
 
 func test_fill_tabletop():

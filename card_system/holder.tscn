@@ -24,6 +24,9 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
+capacity = null
+snap_on_drop = null
+snap_duration = null
 
 [node name="Visual" type="NinePatchRect" parent="."]
 anchor_right = 1.0

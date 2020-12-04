@@ -1,26 +1,17 @@
-extends Control
+extends CardContainer
 
 class_name Holder
 
-var _cards:CardContainer = null
-
-export(int) var capacity = 1
 export(bool) var snap_on_drop = true
 export(float) var snap_duration := 0.1
 
-signal card_added
 signal card_entered
 signal card_exited
 signal card_placed
-signal card_removed
 
 
-func _init():
-	_cards = CardContainer.new()
-	rect_pivot_offset = rect_size / 2
-	
-	
 func _ready():
+	rect_pivot_offset = rect_size / 2
 	$Sensor.holder = self
 	$Sensor.position = rect_pivot_offset
 	$Visual.rect_position = Vector2.ZERO
@@ -29,13 +20,13 @@ func _ready():
 
 
 func _highlight_top_card():
-	if _cards.count() == 0:
+	if count() == 0:
 		return
-	for c in _cards._cards:
+	for c in _cards:
 		c.mouse_filter = MOUSE_FILTER_IGNORE
 		c.modulate = Color.black
-	_cards.peek_last().modulate = Color.white
-	_cards.peek_last().mouse_filter = MOUSE_FILTER_STOP
+	peek_last().modulate = Color.white
+	peek_last().mouse_filter = MOUSE_FILTER_STOP
 
 	
 func _continue_flip(object, _key):
@@ -50,13 +41,6 @@ func _snap(card):
 		var target = self.rect_global_position + self.rect_pivot_offset - card.rect_size / 2
 		$Tween.interpolate_property(card, "rect_global_position", card.rect_global_position, target, snap_duration, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$Tween.start()
-			
-
-func _add(card):
-	_cards.add(card)
-	_snap(card)
-	_highlight_top_card()
-	emit_signal("card_added", card)
 
 
 func on_card_entered(card):
@@ -69,49 +53,31 @@ func on_card_exited(card):
 	if not has_card(card) and card.is_connected("card_dropped", self, "_on_card_dropped") :
 		card.disconnect("card_dropped", self, "_on_card_dropped")
 	emit_signal("card_exited")
-
-
-func on_card_removed(card):
-	remove(card)
 	
 
 func _on_card_dropped(card):
-	emit_signal("card_placed")
-	if not has_card(card) and count() + 1 <= capacity:
-		_add(card)
-		return
+	if not has_card(card) and has_available_capacity(1):
+		emit_signal("card_placed", card)
 	if has_card(card):
 		if card.overlaps(self):
 			_snap(card)
 			_highlight_top_card()
-			return
-		on_card_removed(card)
+		else:
+			emit_signal("card_removed", card)
 	
-	
+
 func get_sensor():
 	return $Sensor
 
 
-func has_card(card):
-	return _cards.has(card.id)
+func add(card):
+	.add(card)
 
 
 func remove(card):
-	card.disconnect("card_dropped", self, "_on_card_dropped")
-	if count() > 0 and card == _cards.peek_last():
-		_cards.remove_last()
+	if card.is_connected("card_dropped", self, "_on_card_dropped"):
+		card.disconnect("card_dropped", self, "_on_card_dropped")
+	.remove(card)
 	_highlight_top_card()
 	card.modulate = Color.white
-	emit_signal("card_removed", card)
 
-
-func peek_last():
-	return _cards.peek_last()
-
-
-func remove_from_top():
-	return _cards.remove_last()
-
-
-func count():
-	return _cards.count()

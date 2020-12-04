@@ -2,7 +2,6 @@ extends "res://addons/gut/test.gd"
 
 var HolderScene = load("res://card_system/holder.tscn")
 var holder
-var Card = load("res://card_system/card.tscn")
 
 
 func before_each():
@@ -11,6 +10,7 @@ func before_each():
 
 
 func test_init():
+	assert_eq(holder.capacity, -1)
 	assert_almost_eq(holder.rect_pivot_offset, holder.rect_size/2, Vector2(0.1, 0.1))
 	assert_eq(holder.count(), 0)
 	
@@ -26,10 +26,10 @@ func test_ready():
 
 
 func test_add_card():
-	var card_double = double(Card).instance()
-	add_child_autofree(card_double)
+	var card_double = double(Card).new()
+	autofree(card_double)
 	watch_signals(holder)
-	holder._add(card_double)
+	holder.add(card_double)
 	assert_eq(holder.count(), 1, "Card collection increased by one.")
 	assert_signal_emitted(holder, "card_added")
 
@@ -40,10 +40,10 @@ func test_get_sensor():
 
 
 func test_has_card():
-	var card_temp = Card.instance()
-	add_child_autofree(card_temp)
+	var card_temp = Card.new()
+	autofree(card_temp)
 	assert_false(holder.has_card(card_temp))
-	holder._add(card_temp)
+	holder.add(card_temp)
 	assert_true(holder.has_card(card_temp))
 
 

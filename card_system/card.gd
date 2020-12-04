@@ -8,16 +8,18 @@ var _is_grabbing
 var _cursor_over
 var _grabbed_offset
 
+var container = null
+
 var uuid_util = preload("res://card_system/uuid/uuid.gd")
 
-var id = "" setget set_id, get_id
+var card_id = "" setget set_card_id, get_card_id
 
 signal card_picked
 signal card_dropped
 
 
 func _init():
-	set_id()
+	set_card_id()
 	rect_pivot_offset = rect_size / 2
 	_cursor_over = false
 
@@ -86,15 +88,15 @@ func _on_card_exited_area(area):
 		area.holder.on_card_exited(self)
 	
 
-func set_id(new_id = ""):
+func set_card_id(new_id = ""):
 	if new_id == "":
-		id = uuid_util.v4()
+		card_id = uuid_util.v4()
 		return
-	id = new_id
+	card_id = new_id
 
 
-func get_id():
-	return id
+func get_card_id():
+	return card_id
 
 
 func move_to(position, duration):
