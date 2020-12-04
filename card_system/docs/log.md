@@ -44,3 +44,11 @@ Tenho feito um protótipo do jogo dos disquetes, usando o sistema, e estou encon
 (...) Criei a classe base `CardContainer`, agora vou começar a refazer `Deck` e `Holder` para utilizarem essa classe como componente.
 
 (...) `Deck` está re-feito. Agora seria o caso de começar a alterar `Holder`. (...) Feito.
+
+### 2020-12-04
+
+(...) Refiz uma boa parte do sistema de `CardContainer`, achei que ficou mais fácil de usar. Na hora já diminuiu bastante a duplicação tanto nas implementações quanto nos testes.
+
+Ainda estou tendo problemas com interações de arrastar e os holders. Basicamente, nem sempre a mudança direta de uma carta de um espaço para outro está funcional. Vou ter que repensar como isso está sendo feito.
+
+Fiquei um tempão fazendo isso ao invés de outras coisas que tinha planejado fazer. Tá foda.
