@@ -27,5 +27,5 @@ func test_loaded_floppies():
 func test_fill_tabletop():
 	var count = wksp.deck.count()
 	wksp.fill_tabletop()
-	assert_gt(wksp.tabletop.get_child_count(), 0)
+	assert_gt(wksp.tabletop.count(), 0)
 	assert_eq(wksp.deck.count(), count - 2)

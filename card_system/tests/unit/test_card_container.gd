@@ -66,10 +66,24 @@ func test_remove_card_by_id():
 
 	watch_signals(container)
 	var id = c1.get_id()
-	var removed = container.remove(id)
+	var removed = container.remove_by_id(id)
 	assert_eq(container.count(), 0)
 	assert_not_null(removed)
-	removed = container.remove(id)
+	removed = container.remove_by_id(id)
+	assert_signal_emitted(container, "removed_card_id_not_found")
+	assert_null(removed)
+
+
+func test_remove_card():
+	var c1 = Card.new()
+	container.add(c1)
+	autofree(c1)
+
+	watch_signals(container)
+	var removed = container.remove(c1)
+	assert_eq(container.count(), 0)
+	assert_not_null(removed)
+	removed = container.remove(c1)
 	assert_signal_emitted(container, "removed_card_id_not_found")
 	assert_null(removed)
 

@@ -60,6 +60,11 @@ _global_script_classes=[ {
 "path": "res://sfx_player.gd"
 }, {
 "base": "Node2D",
+"class": "Tabletop",
+"language": "GDScript",
+"path": "res://tabletop.gd"
+}, {
+"base": "Node2D",
 "class": "Workshop",
 "language": "GDScript",
 "path": "res://workshop.gd"
@@ -75,13 +80,14 @@ _global_script_class_icons={
 "Holder": "",
 "HolderArea": "",
 "SfxPlayer": "",
+"Tabletop": "",
 "Workshop": ""
 }
 
 [application]
 
 config/name="card_system"
-run/main_scene="res://card_system/tests/tests.tscn"
+run/main_scene="res://workshop.tscn"
 
 [debug]
 

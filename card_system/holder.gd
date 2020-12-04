@@ -56,7 +56,7 @@ func _add(card):
 	_cards.add(card)
 	_snap(card)
 	_highlight_top_card()
-	emit_signal("card_added")
+	emit_signal("card_added", card)
 
 
 func on_card_entered(card):

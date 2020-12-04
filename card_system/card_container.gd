@@ -53,13 +53,13 @@ func get_ids() -> Array:
 func remove_last():
 	var res = null
 	if not _cards.empty():
-		res = remove(_cards.back().id)
+		res = remove_by_id(_cards.back().id)
 	else:
 		emit_signal("removed_card_container_was_empty")
 	return res
 
 
-func remove(id):
+func remove_by_id(id):
 	var res = null
 	var i = _find_index_by_id(id)
 	if i >= 0:
@@ -71,6 +71,10 @@ func remove(id):
 	return res
 
 
+func remove(card):
+	return remove_by_id(card.id)
+
+
 func peek_last():
 	if not _cards.empty():
 		return _cards.back()
@@ -79,7 +83,7 @@ func peek_last():
 
 func _find_index_by_id(id):
 	for c in range(_cards.size()):
-		if _cards[c].get_id() == id:
+		if _cards[c].id == id:
 			return c
 	return -1
 
