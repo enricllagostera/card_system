@@ -5,10 +5,11 @@ var card
 func run():
 	var result = []
 	print("run ", name, " logic")
-	var clone = _cards.peek_last().duplicate()
-	clone.set_id()
-	result.append(clone)
-	result.append(_cards.peek_last())
-	card = remove_from_top()
+	card = peek_last()
 	card.move_to(card.rect_position + Vector2(2000,0), 0.5)
+	var clone = { 
+		"data": card.data.duplicate(true) 
+	}
+	result.append(card)
+	result.append(clone)
 	return result

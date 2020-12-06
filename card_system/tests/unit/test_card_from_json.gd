@@ -8,11 +8,6 @@ func before_each():
 	add_child_autofree(card)
 
 
-func test_init():	
-	watch_signals(card)
-	card.set_json_file_path("res://card_system/tests/card_data.json")
-
-
 func test_set_json_file_path():
 	watch_signals(card)
 	card.set_json_file_path("res://card_system/tests/random_filename.json")
