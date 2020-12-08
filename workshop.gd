@@ -32,7 +32,6 @@ func add_new_floppy(data):
 	new_floppy.data = data
 	new_floppy.set_label(data.label)
 	new_floppy.visible = false
-	new_floppy.rect_global_position = Vector2(0,0)
 	return new_floppy
 
 
@@ -43,8 +42,7 @@ func fill_tabletop():
 			_refill_player_deck()
 		if deck.count() > 0:
 			var c = deck.peek_last()
-			c.stop_animations()
-			c.rect_global_position = Vector2(0,0)
+			c.rect_position = Vector2(0,0)
 			c.visible = true
 			CardContainer.switch(c, deck, tabletop)
 
@@ -70,6 +68,7 @@ func _on_EndTurnButton_button_up():
 
 
 func _refill_player_deck():
+	print("refilling deck")
 	for i in discard_deck.count():
 		CardContainer.switch(discard_deck.peek_last(), discard_deck, deck)
 	deck.random_shuffle()
