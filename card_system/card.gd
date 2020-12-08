@@ -112,3 +112,7 @@ func move_to_with_callback(position, duration, object = null, callback = ""):
 
 func overlaps(holder) -> bool:
 	return $Sensor.overlaps_area (holder.get_sensor())
+
+
+func stop_animations():
+	$Tween.stop_all()
